@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-position: right;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background: url(img/Fondo.png);
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+}
+.container{
+    width: 500px;
+    padding: 20px;
+    background:center;
+    margin: auto;
+    margin-top: 80px;
+}
+.titulo{
+    text-align: center;
+   
+    color: #8A7B77;
+    font-size: 42px;
+    margin: auto;
+
+}
+.padre{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border-radius: 30px;
+    color:#8A7B77;
+}
+.nombre,.correo,.cedula,.telefono,.contraseña{
+    display: flex;
+    flex-direction: column;
+    border-radius: 50px;
+
+}
+input{
+    padding: 8px;
+    border-radius: 30px;
+}
+input:focus{
+    outline: solid purple 2px;
+    border-radius: 30px;
+}
+.cuenta{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+
+}
+
+button{
+    width: 200px;
+    height: 40px;
+    margin-top: 15px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px;
+    font-size: 20px;
+    transition: all 0.3s;
+    color: #8A7B77;
+}
+.boton{
+    color: #8A7B77;
+    border-radius: 80px;
+    font-size: 20px;
+}
+.registrar{
+    text-align: center
+    ;
+}
+
+@media screen and (max-width:480px) {
+
+    .container{
+        position: static;
+    }
+    .titulo, .nombre,.correo,.cedula, .telefono,.contraseña{
+        width: auto;
+    }
+}
