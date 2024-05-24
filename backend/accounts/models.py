@@ -6,7 +6,6 @@ from django.db import models
 Model definitions
 """
 class User(models.Model):
-    username = models.CharField(max_length=255, null=False,unique=True)
     email = models.EmailField(unique=True,null=False)
     admin = models.BooleanField(default=False)
     nombre =models.CharField(max_length=50,null=False)
