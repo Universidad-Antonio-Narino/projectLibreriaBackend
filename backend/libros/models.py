@@ -1,5 +1,5 @@
 from django.db import models
-
+#from acconts.models import UserLibrary as User
 class Libro(models.Model):
     """
     Model representing a book.
@@ -9,6 +9,7 @@ class Libro(models.Model):
     precioCompra = models.IntegerField(null=False)
     precioVenta = models.IntegerField(null=False)
     stock = models.IntegerField(null=False)
+    #user = models.ForeignKey(User,on_delete=models.CASCADE)
     class Meta:
         verbose_name_plural = "Libro"
 
