@@ -4,7 +4,7 @@ from .views import *
 #ejecuto los routers
 router = routers.DefaultRouter()
 
-router.register('api/libros',LibrosViewSet,'libros')
+router.register('api/libros/admin',LibrosAdminViewSet,'libros')
 router.register('api/transaccion',TransaccionViewSet,'transacciones')
 
 
