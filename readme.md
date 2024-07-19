@@ -1,6 +1,6 @@
 # Libreria uan
 
-Este proyecto es un proyecto universitaro, de la materia de diseño de bases de datos, el cual busqueda la practica de los conocimientos dados en la materia con el lenguaje sql, en el taller practico se podia hacer el codigo con solo sql y un conector de bases de datos para tres lenguajes, los cuales eran: java, c++ y python, en el momento el taller estaba desarrollado para un grupo de 6 estudiantes, el proyecto lo puede encontrar aqui([Explicacion proyecto, titulado Libreria proyectos](/Libreria.md))
+Este proyecto es un proyecto universitaro, de la materia de diseño de bases de datos, el cual busqueda la practica de los conocimientos dados en la materia con el lenguaje sql, en el taller practico se podia hacer el codigo con solo sql y un conector de bases de datos para tres lenguajes, los cuales eran: java, c++ y python, en el momento el taller estaba desarrollado para un grupo de 6 estudiantes, el proyecto lo puede encontrar aqui([Explicacion proyecto, titulado Libreria proyectos](/Libreria.md)), cabe recalcar que el proyecto aun no esta 100% terminado faltan algunas cosas, como autenticacion de usuario, la parte de seguridad, entre otras
 
 ## 🛠 Skills
 - [![Django][Django-logo]][Django-url]
@@ -31,7 +31,9 @@ Este proyecto es un proyecto universitaro, de la materia de diseño de bases de 
 
 ## Authors
 
-- [@octokatherine](https://www.github.com/octokatherine)
+- [@acPaula01](https://github.com/acPaula01): Estudiante de ingenieria de Sistemas y computacion -> Fronted para el proyecto
+- [@DanielaA23](https://github.com/DanielaA23): Estudiante de ingenieria de Sistemas y computacion -> Fronted para el proyecto
+- [@HelloWord-404](https://github.com/HelloWord-404): Estudiante de ingenieria de Sistemas y computacion -> Fronted y backend para el proyecto
 
 ## Features
 
