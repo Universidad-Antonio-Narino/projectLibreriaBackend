@@ -40,9 +40,5 @@ El codigo de la otra parte del proyecto(fronted), esta en el siguiente link: [pr
 
 ## Features
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
 
 ## API Reference
