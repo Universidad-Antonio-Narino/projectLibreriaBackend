@@ -1,6 +1,7 @@
 # Libreria uan
 
-Este proyecto es un proyecto universitaro, de la materia de diseño de bases de datos, el cual busqueda la practica de los conocimientos dados en la materia con el lenguaje sql, en el taller practico se podia hacer el codigo con solo sql y un conector de bases de datos para tres lenguajes, los cuales eran: java, c++ y python, en el momento el taller estaba desarrollado para un grupo de 6 estudiantes, el proyecto lo puede encontrar aqui([Explicacion proyecto, titulado Libreria proyectos](/Libreria.md)), cabe recalcar que el proyecto aun no esta 100% terminado faltan algunas cosas, como autenticacion de usuario, la parte de seguridad, entre otras
+Este proyecto es un proyecto universitaro, de la materia de diseño de bases de datos, el cual busqueda la practica de los conocimientos dados en la materia con el lenguaje sql, en el taller practico se podia hacer el codigo con solo sql y un conector de bases de datos para tres lenguajes, los cuales eran: java, c++ y python, en el momento el taller estaba desarrollado para un grupo de 6 estudiantes, el proyecto lo puede encontrar aqui([Explicacion proyecto, titulado Libreria proyectos](/Libreria.md)), cabe recalcar que el proyecto aun no esta 100% terminado faltan algunas cosas, como autenticacion de usuario, la parte de seguridad, entre otras.
+El codigo de la otra parte del proyecto(fronted), esta en el siguiente link: [projectsuanFronted](https://github.com/Universidad-Antonio-Narino/projectsuanFronted.git)
 
 ## 🛠 Skills
 - [![Django][Django-logo]][Django-url]
@@ -34,6 +35,8 @@ Este proyecto es un proyecto universitaro, de la materia de diseño de bases de 
 - [@acPaula01](https://github.com/acPaula01): Estudiante de ingenieria de Sistemas y computacion -> Fronted para el proyecto
 - [@DanielaA23](https://github.com/DanielaA23): Estudiante de ingenieria de Sistemas y computacion -> Fronted para el proyecto
 - [@HelloWord-404](https://github.com/HelloWord-404): Estudiante de ingenieria de Sistemas y computacion -> Fronted y backend para el proyecto
+- [@santiagoangel04](https://github.com/santiagoangel04): Estudiante de ingenieria de Sistemas y computacion -> backend para el proyecto
+- [@NataliaD7](https://github.com/NataliaD7):Estudiante de ingenieria de Sistemas y computacion -> frontend para el proyecto
 
 ## Features
 
@@ -43,27 +46,3 @@ Este proyecto es un proyecto universitaro, de la materia de diseño de bases de 
 - Cross platform
 
 ## API Reference
-
-#### Get all items
-
-```http
-  GET /api/items
-```
-
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-
-#### Get item
-
-```http
-  GET /api/items/${id}
-```
-
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
-
-#### add(num1, num2)
-
-Takes two numbers and returns the sum.
