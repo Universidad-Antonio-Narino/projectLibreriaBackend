@@ -42,3 +42,23 @@ El codigo de la otra parte del proyecto(fronted), esta en el siguiente link: [pr
 
 
 ## API Reference
+
+## Get
+
+#### Get all books
+
+```http
+  GET /api/libros
+```
+
+#### Get item
+```http
+  GET /api/libros/{id}/
+```
+
+## Post
+
+#### Post books
+```http
+  POST /api/libros
+```
