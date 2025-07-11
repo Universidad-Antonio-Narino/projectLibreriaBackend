@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from decouple import config
 from pathlib import Path
-
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,13 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework_simplejwt',
     'rest_framework',
     'accounts',
-    'libros',
+    #'libros',
     'rest_auth', # new!
     'corsheaders',#arreglar problemas consumo api
 ]
 
+AUTH_USER_MODEL ='accounts.UserLibrary'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,13 +56,36 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'accounts.middleware.JWTAuthenticationMiddleware'
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
 ]
 
+SIMPLE_JWT = {
+    #specifies how long access tokens are valid
+    "ACCESS_TOKEN_LIFETIME":timedelta(minutes=60),
+    #specifies how long refresh tokens are valid
+    "REFRESH_TOKEN_LIFETIME":timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS":False,
+    #to be added to the blacklist if the blacklist app is in use
+    "BLACKLIST_AFTER_ROTATION":False,
+    "ALGORITHM":"HS256",
+    "SIGNING_KEY":SECRET_KEY+'brr',
+    #Define el emisor del token. Es una forma de identificar quién generó el token. En este caso, no se está definiendo un emisor.
+    "AUTH_HEADER_TYPES":("Bearer",), 
+    "AUTH_TOKEN_CLASSES": ('rest_framework_simplejwt.tokens.AccessToken',),
+    "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
+    "USER_ID_FIELD": "cedula"
+}
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 ROOT_URLCONF = 'drf.urls'
 
 TEMPLATES = [
@@ -88,11 +113,11 @@ WSGI_APPLICATION = 'drf.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('MYSQL_NAME'),
-        'USER': config('MYSQL_USER'),
-        'PASSWORD': config('MYSQL_PASSWORD'),
-        'HOST': config('MYSQL_HOST'),
-        'PORT': config('MYSQL_PORT')
+        'NAME': 'libreriauan',
+        'USER': 'root',
+        'PASSWORD': 'xa@j!H11w59k',
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
     }
 }
 

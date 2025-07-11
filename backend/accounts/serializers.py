@@ -1,75 +1,62 @@
-from django.db.models import Q # for queries
+#from django.db.models import Q  for queries
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from .models import User
-from django.core.exceptions import ValidationError
+from .models import UserLibrary
+from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
 
-
-
-class UserSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(
-        required=True,
-        validators=[UniqueValidator(queryset=User.objects.all())]
-        )
-    password = serializers.CharField(max_length=128)
+#serializer.Serializer is better to register and login operations
+class SignUpSerializer(serializers.Serializer):
+    password = serializers.CharField(min_length = 8,max_length=16,style={'input_type':'password'},write_only=True)
+    #valida que el campo ingresado no exista en dba UniqueValidator
+    cedula = serializers.CharField(required = True,validators=[UniqueValidator(queryset=UserLibrary.objects.all(),message='Usuario existente')])
+    email = serializers.EmailField(required = True,validators=[UniqueValidator(queryset=UserLibrary.objects.all(),message='Usuario existente')])
+    username = serializers.CharField(required = True,validators=[UniqueValidator(queryset=UserLibrary.objects.all(),message='Ese nombre de usuario ya esta en uso')])
+    first_name = serializers.CharField(max_length = 20)
+    last_name = serializers.CharField(max_length = 50)
+    tel = serializers.CharField(max_length = 10)
     
-    class Meta:
-        model = User
-        fields = (
-            'nombre',
-            'email',
-            'cedula',
-            'numeroTelefono',
-            'password',
-        )
-
-
-class UserLoginSerializer(serializers.ModelSerializer):
-    # to accept either username or email
-    email = serializers.CharField()
-    password = serializers.CharField()
-    id = serializers.IntegerField(required=False, read_only=True)
-
-    def validate(self, data):
-        # user,email,password validator
-        email = data.get("email", None)
-        password = data.get("password", None)
-        if not email and not password:
-            raise ValidationError("Details not entered.")
-        user = None
-        # if the email has been passed
-        if '@' in email:
-            user = User.objects.filter(
-                Q(email=email) &
-                Q(password=password)
-                ).distinct()
-            if not user.exists():
-                raise ValidationError("User credentials are not correct.")
-            user = User.objects.get(email=email)
-        else:
-            user = User.objects.filter(
-                Q(username=email) &
-                Q(password=password)
-            ).distinct()
-            if not user.exists():
-                raise ValidationError("User credentials are not correct.")
-            user = User.objects.get(email=email)
-        if user.ifLogged:
-            raise ValidationError("User already logged in.")
-        user.ifLogged = True
-        data['id'] = user.id
-        data['password'] = len(user.password) * "x"
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = UserLibrary(**validated_data)
+        #hashea contraseña
+        user.set_password(password)
+        #guarda contraseña hasheada
         user.save()
-        return data
-
-    class Meta:
-        model = User
-        fields = (
-            'id',
-            'email',
-            'password',
-        )
-
-        read_only_fields = (
-            'id',
-        )
+        return user
+    
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(style = {'input_type':'password'},write_only= True)
+    access_token = serializers.CharField(max_length=200,read_only=True)
+    refresh_token = serializers.CharField(max_length=200,read_only=True)
+    id = serializers.IntegerField(read_only = True)
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+        
+        try:
+            user = UserLibrary.objects.get(email__iexact=email)
+        except UserLibrary.DoesNotExist:
+            raise serializers.ValidationError(
+                {"Error":"Credencial no es valida/email"},
+                code=status.HTTP_404_NOT_FOUND
+            )
+        if not user.check_password(password):
+            raise serializers.ValidationError(
+                {"Error":"Credencial invalida/Password"},
+                code=status.HTTP_404_NOT_FOUND
+            )
+        token = RefreshToken.for_user(user)
+        
+        return {
+            "first_name": str(user.first_name),
+            "last_name": str(user.last_name),
+            "email": str(user.email),
+            "access_token": str(token.access_token),
+            "refresh_token":str(token),
+        }
+    
+    
+    
+    
